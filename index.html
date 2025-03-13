@@ -25,14 +25,19 @@
         </div>
         <div class="trignometry-functions">
           <div>
-            <img class = "imageHW" src="./images/right-triangle.png" alt="delete content button"> Trignometry
-            <select>
-                
+            <img class = "imageHW" src="./images/right-triangle.png" alt="delete content button"> 
+            <select class = "trig-func" onchange="handleTrignometryFunction(this.value)">
+                <option>Trignometry</option>
+                <option>sin</option>
+                <option>cos</option>
+                <option>tan</option>
             </select>
         </div>
-          <div>&#119891  Function
-            <select>
-                
+          <div>&#119891  
+            <select onchange="handleAdvancedFunction(this.value)">
+                <option>Function</option>
+                <option>Ceil()</option>
+                <option>Floor()</option>
             </select>
           </div>
         </div>

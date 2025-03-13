@@ -7,6 +7,7 @@ const removeContentButton = document.querySelector(`.remove-data`);
 const resultButton = document.querySelector(`#calculator-buttons-result`);
 const signToggleButton = document.querySelector(`.toggle-sign`);
 let regex;
+
 calculatorButtons.forEach((e) => {
   e.addEventListener(`click`, () => {
     if (e.textContent === `C`) calculatorInput.value = ``;
@@ -134,6 +135,7 @@ resultButton.addEventListener(`click`, () => {
     });
 
     calculatorInput.value = eval(newStr);
+    document.getElementsByClassName("trig-func")[0].value = "Trignometry";
   } catch (err) {
     calculatorInput.value = `ERROR`;
   }
