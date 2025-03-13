@@ -10,7 +10,8 @@ let regex;
 
 calculatorButtons.forEach((e) => {
   e.addEventListener(`click`, () => {
-    if (e.textContent === `C`) calculatorInput.value = ``;
+    if (calculatorInput.value === "ERROR") return;
+    else if (e.textContent === `C`) calculatorInput.value = ``;
     else if (e.textContent === `|x|`) {
       calculatorInput.value += `|`;
     } else if (e.textContent === `+/-`) {
@@ -92,12 +93,13 @@ function replaceAll(newStr) {
   newStr = newStr.replace("π", `${Math.PI}`);
   newStr = newStr.replace("^", "**");
   newStr = newStr.replace("√", "Math.sqrt");
+  newStr = newStr.replace("cosec", "1/sin");
+  newStr = newStr.replace("sec", "1/cos");
+  newStr = newStr.replace("cot", "1/tan");
   newStr = newStr.replace("sin", "Math.sin");
   newStr = newStr.replace("cos", "Math.cos");
   newStr = newStr.replace("tan", "Math.tan");
-  newStr = newStr.replace("cosec", "1/Math.sin");
-  newStr = newStr.replace("sec", "1/Math.cos");
-  newStr = newStr.replace("cot", "1/Math.tan");
+
   newStr = newStr.replace(`exp`, `e`);
   newStr = newStr.replace(`log(`, `Math.log10(`);
   newStr = newStr.replace(`ln(`, `Math.log(`);
