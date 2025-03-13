@@ -86,22 +86,36 @@ function fact(num) {
   return fact;
 }
 
+function replaceAll(newStr) {
+  newStr = newStr.replace(`X`, `*`);
+  newStr = newStr.replace(`÷`, `/`);
+  newStr = newStr.replace("π", `${Math.PI}`);
+  newStr = newStr.replace("^", "**");
+  newStr = newStr.replace("√", "Math.sqrt");
+  newStr = newStr.replace("sin", "Math.sin");
+  newStr = newStr.replace("cos", "Math.cos");
+  newStr = newStr.replace("tan", "Math.tan");
+  newStr = newStr.replace("cosec", "1/Math.sin");
+  newStr = newStr.replace("sec", "1/Math.cos");
+  newStr = newStr.replace("cot", "1/Math.tan");
+  newStr = newStr.replace(`exp`, `e`);
+  newStr = newStr.replace(`log(`, `Math.log10(`);
+  newStr = newStr.replace(`ln(`, `Math.log(`);
+  newStr = newStr.replace(`(e)`, `(${Math.E})`);
+  newStr = newStr.replace(`(e`, `(${Math.E}*`);
+  newStr = newStr.replace(`e)`, `*${Math.E})`);
+  newStr = newStr.replace("ceil", "Math.ceil");
+  newStr = newStr.replace("floor", "Math.floor");
+  console.log(newStr);
+
+  return newStr;
+}
+
 resultButton.addEventListener(`click`, () => {
   try {
     let newStr = calculatorInput.value;
     if (newStr == ``) return;
-    newStr = newStr.replace(`X`, `*`);
-    newStr = newStr.replace(`÷`, `/`);
-    newStr = newStr.replace("π", `${Math.PI}`);
-    newStr = newStr.replace("^", "**");
-    newStr = newStr.replace("√", "Math.sqrt");
-    newStr = newStr.replace(`exp`, `e`);
-    newStr = newStr.replace(`log(`, `Math.log10(`);
-    newStr = newStr.replace(`ln(`, `Math.log(`);
-    newStr = newStr.replace(`(e)`, `(${Math.E})`);
-    newStr = newStr.replace(`(e`, `(${Math.E}*`);
-    newStr = newStr.replace(`e)`, `*${Math.E})`);
-
+    newStr = replaceAll(newStr);
     if (newStr.includes(`e`)) {
       if (newStr.length !== 1) {
         if (newStr[newStr.length - 1] == `e`) {
@@ -135,7 +149,6 @@ resultButton.addEventListener(`click`, () => {
     });
 
     calculatorInput.value = eval(newStr);
-    document.getElementsByClassName("trig-func")[0].value = "Trignometry";
   } catch (err) {
     calculatorInput.value = `ERROR`;
   }
@@ -188,4 +201,28 @@ function signToggleFunc() {
     str += a;
   }
   calculatorInput.value = str;
+}
+
+function handleTrignometryFunction(funcName) {
+  if (funcName === "Trignometry") return;
+  regex = /(\d+)$/;
+  if (regex.test(calculatorInput.value)) {
+    calculatorInput.value += `X${funcName}(`;
+  } else {
+    calculatorInput.value += `${funcName}(`;
+  }
+
+  document.getElementsByClassName("trig-func")[0].value = "Trignometry";
+}
+
+function handleAdvancedFunction(funcName) {
+  if (funcName === "Function") return;
+  regex = /(\d+)$/;
+  if (regex.test(calculatorInput.value)) {
+    calculatorInput.value += `X${funcName}(`;
+  } else {
+    calculatorInput.value += `${funcName}(`;
+  }
+
+  document.getElementsByClassName("advance-func")[0].value = "Function";
 }
