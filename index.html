@@ -17,6 +17,12 @@
             alt="visit history button"
             tabindex="0"
           />
+          <img
+            src="./images/brightness-and-contrast.png"
+            alt="button for light and dark mode"
+            class="imageHW hamburger-menu"
+            tabindex="0"
+          />
           <input type="text" class="calculator-input" placeholder="0" />
         </div>
         <div class="advanced-operations">
@@ -76,7 +82,10 @@
             </div>
           </div>
         </div>
-        <div class="calculator-buttons">
+        <div
+          class="calculator-buttons"
+          onclick="handleClickOnCalculator(event)"
+        >
           <div tabindex="0" onclick="handleSecondSetOfOperations(this)">
             <p>2<sup>nd</sup></p>
           </div>

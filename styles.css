@@ -57,7 +57,7 @@ body {
 }
 
 .calculator-input {
-  width: 450px;
+  width: 400px;
   padding: 0;
   height: 100%;
   background-color: transparent;
@@ -170,6 +170,10 @@ body {
   overflow-y: auto;
 }
 
+.history-section::-webkit-scrollbar {
+  display: none;
+}
+
 .close-history {
   cursor: pointer;
 }
@@ -212,7 +216,6 @@ body {
 
 .history-data:hover,
 .clear-history-button > button:hover {
-  /* background-color: #c6d7e9; */
   opacity: 0.4;
 }
 
@@ -246,7 +249,7 @@ body {
   }
 
   .calculator-input {
-    width: 350px;
+    width: 300px;
   }
 
   .advanced-operations {
@@ -280,7 +283,7 @@ body {
   }
 
   .calculator-input {
-    width: 300px;
+    width: 250px;
   }
 
   .advanced-operations {

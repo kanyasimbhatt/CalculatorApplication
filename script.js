@@ -25,6 +25,9 @@ document.addEventListener("keyup", (event) => {
     "%",
     "e",
     "^",
+    ".",
+    "(",
+    ")",
   ];
 
   if (event.key === "Backspace" || event.key === "Delete") {
@@ -39,120 +42,73 @@ document.addEventListener("keyup", (event) => {
 });
 
 //adding an event listener to each button in calculator
-calculatorButtons.forEach((e) => {
-  e.addEventListener(`click`, () => {
-    let val = e.textContent;
+function handleClickOnCalculator(event) {
+  let e = event.target;
+  let val = e.textContent;
 
-    if (e.className === "remove-data") {
-      return;
-    }
-    val = val.trim(); //it automatically added some white space so had to add it to remove them
+  if (e.className === "remove-data") {
+    return;
+  }
+  val = val.trim(); //it automatically added some white space so had to add it to remove them
 
-    switch (val) {
-      case "=":
-        resultFunc();
-        break;
+  switch (val) {
+    case "=":
+      resultFunc();
+      break;
 
-      case "C":
-        calculatorInput.value = "";
-        break;
+    case "C":
+      calculatorInput.value = "";
+      break;
 
-      case `|x|`:
-        calculatorInput.value += `|`;
-        break;
+    case `|x|`:
+      calculatorInput.value += `|`;
+      break;
 
-      case `+/-`:
-        signDegToggleFlagFunc();
-        break;
+    case `+/-`:
+      signDegToggleFlagFunc();
+      break;
 
-      case `1/x`:
-        regex = /(\d+)\.?0*(\d*)$/g;
+    case `1/x`:
+      handleDivisionToOne();
+      break;
 
-        if (regex.test(calculatorInput.value)) {
-          calculatorInput.value = calculatorInput.value.replace(
-            regex,
-            (match, num1, num2) => {
-              if (num2) return `1/${num1}.${num2}`;
-              else return `1/${num1}`;
-            }
-          );
-        } else calculatorInput.value += `1/`;
+    case `x2`:
+      calculatorInput.value += "^2";
+      break;
 
-        break;
+    case `x3`:
+      calculatorInput.value += `^3`;
+      break;
 
-      case `x2`:
-        calculatorInput.value += "^2";
-        break;
+    case "n!":
+      calculatorInput.value += "!";
+      break;
 
-      case `x3`:
-        calculatorInput.value += `^3`;
-        break;
+    case `10x`:
+      handleTenRaiseToX();
+      break;
 
-      case "n!":
-        calculatorInput.value += "!";
-        break;
+    case `xy`:
+      calculatorInput.value += "^";
+      break;
 
-      case `10x`:
-        regex = /(\d+)\.?0*(\d*)$/g;
-        if (regex.test(calculatorInput.value)) {
-          calculatorInput.value = calculatorInput.value.replace(
-            regex,
-            (match, num1, num2) => {
-              if (num2) return `10^${num1}.${num2}`;
-              else return `10^${num1}`;
-            }
-          );
-        } else {
-          calculatorInput.value += "10^";
-        }
-        break;
+    case `2nd`:
+      break;
 
-      case `xy`:
-        calculatorInput.value += "^";
-        break;
+    case `3√x`:
+      handleRoot();
+      break;
 
-      case `2nd`:
-        break;
+    case `2√x`:
+      handleRoot();
+      break;
 
-      case `3√x`:
-        regex = /(\d+)$/;
-
-        if (regex.test(calculatorInput.value)) {
-          calculatorInput.value = calculatorInput.value.replace(
-            regex,
-            (match, num) => {
-              return `${num}X√(`;
-            }
-          );
-        } else {
-          calculatorInput.value += "√(";
-        }
-
-        break;
-
-      case `2√x`:
-        regex = /(\d+)$/;
-
-        if (regex.test(calculatorInput.value)) {
-          calculatorInput.value = calculatorInput.value.replace(
-            regex,
-            (match, num) => {
-              return `${num}X√(`;
-            }
-          );
-        } else {
-          calculatorInput.value += "√(";
-        }
-
-        break;
-
-      default:
-        if (calculatorInput.value === "ERROR") return;
-        calculatorInput.value += val;
-        if (val == `ln` || val == `log`) calculatorInput.value += `(`;
-    }
-  });
-});
+    default:
+      if (calculatorInput.value === "ERROR") return;
+      calculatorInput.value += val;
+      if (val == `ln` || val == `log`) calculatorInput.value += `(`;
+  }
+}
 
 document.querySelector(`.remove-data`).addEventListener(`click`, () => {
   let inputVal = calculatorInput.value;
@@ -162,6 +118,50 @@ document.querySelector(`.remove-data`).addEventListener(`click`, () => {
     calculatorInput.value = inputVal.slice(0, -1);
   }
 });
+
+function handleDivisionToOne() {
+  regex = /(\d+)\.?(\d*)$/g;
+
+  if (regex.test(calculatorInput.value)) {
+    calculatorInput.value = calculatorInput.value.replace(
+      regex,
+      (match, num1, num2) => {
+        if (num2) return `1/${num1}.${num2}`;
+        else return `1/${num1}`;
+      }
+    );
+  } else calculatorInput.value += `1/`;
+}
+
+function handleTenRaiseToX() {
+  regex = /(\d+)\.?(\d*)$/g;
+  if (regex.test(calculatorInput.value)) {
+    calculatorInput.value = calculatorInput.value.replace(
+      regex,
+      (match, num1, num2) => {
+        if (num2) return `10^${num1}.${num2}`;
+        else return `10^${num1}`;
+      }
+    );
+  } else {
+    calculatorInput.value += "10^";
+  }
+}
+
+function handleRoot() {
+  regex = /(\d+)$/;
+
+  if (regex.test(calculatorInput.value)) {
+    calculatorInput.value = calculatorInput.value.replace(
+      regex,
+      (match, num) => {
+        return `${num}X√(`;
+      }
+    );
+  } else {
+    calculatorInput.value += "√(";
+  }
+}
 
 function fact(num) {
   let fact = 1;
@@ -376,7 +376,7 @@ function degreeRadianChange(ref) {
 function handleFractionToExponential(ref) {
   let newRegex = /(\d+)$/g;
   if (newRegex.test(calculatorInput.value)) {
-    regex = /(\d+)\.?0*(\d*)$/g;
+    regex = /(\d+)\.?(\d*)$/g;
     calculatorInput.value = calculatorInput.value.replace(
       regex,
       (match, num1, num2) => {
