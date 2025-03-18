@@ -12,6 +12,15 @@ body {
   width: 20px;
 }
 
+.hamburger-menu {
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.hamburger-menu:hover {
+  opacity: 0.4;
+}
+
 #calculator-buttons-numbers {
   background-color: #ffffff;
   font-weight: bolder;
@@ -30,15 +39,20 @@ body {
   width: 100%;
 }
 
-.text-box {
+.enclosing-calculator {
   width: 500px;
-  height: 150px;
+  height: 850px;
   background-color: #eff1f3;
   border-radius: 20px 20px 0 0;
 }
 
+.text-box {
+  height: 150px;
+  display: flex;
+}
+
 .calculator-input {
-  width: 500px;
+  width: 450px;
   padding: 0;
   height: 100%;
   background-color: transparent;
@@ -58,8 +72,6 @@ body {
 
 .advanced-operations {
   height: 200px;
-  width: 500px;
-  background-color: #eff1f3;
 }
 
 .deg-fe {
@@ -123,9 +135,7 @@ body {
 }
 
 .calculator-buttons {
-  width: 500px;
   height: 500px;
-  background-color: #eff1f3;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(7, 1fr);
@@ -145,16 +155,91 @@ body {
   opacity: 0.4;
 }
 
+.history-section {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  height: 800px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.close-history {
+  cursor: pointer;
+}
+
+.history-title-clear-button {
+  display: flex;
+}
+
+.history-title {
+  width: 55%;
+  display: flex;
+  justify-content: flex-end;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.clear-history-button {
+  width: 45%;
+  display: flex;
+  justify-content: center;
+}
+
+.clear-history-button > button {
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.history-data {
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  padding: 10px 0 10px 10px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.history-data:hover,
+.clear-history-button > button:hover {
+  background-color: #c6d7e9;
+}
+
+.no-history-content {
+  text-align: center;
+  font-size: 20px;
+}
+
 @media screen and (max-width: 520px) {
   body {
     overflow-x: hidden;
     overflow-y: hidden;
   }
 
+  .enclosing-calculator {
+    width: 400px;
+    border-radius: 0;
+    height: 800px;
+    position: fixed;
+    top: 0;
+  }
+
+  .history-section {
+    height: 750px;
+  }
+
   .text-box {
     width: 400px;
     position: fixed;
     top: 0;
+  }
+
+  .calculator-input {
+    width: 350px;
   }
 
   .advanced-operations {
@@ -176,10 +261,19 @@ body {
     overflow: hidden;
   }
 
+  .enclosing-calculator {
+    width: 350px;
+    border-radius: 0;
+  }
+
   .text-box {
     width: 350px;
     position: fixed;
     top: 0;
+  }
+
+  .calculator-input {
+    width: 300px;
   }
 
   .advanced-operations {
@@ -198,6 +292,11 @@ body {
     position: fixed;
     top: 0;
   }
+
+  .enclosing-calculator {
+    height: 750px;
+  }
+
   .advanced-operations {
     height: 100px;
     position: fixed;

@@ -10,14 +10,16 @@ let regex;
 //adding an event listener to each button in calculator
 calculatorButtons.forEach((e) => {
   e.addEventListener(`click`, () => {
-    if (e.textContent === "=") resultFunc();
-    else if (e.textContent === `C`) calculatorInput.value = ``;
+    let val = e.textContent;
+    val = val.trim(); //it automatically added some white space so had to add it to remove them
+    if (val === "=") resultFunc();
+    else if (val === `C`) calculatorInput.value = ``;
     else if (calculatorInput.value === "ERROR") return;
-    else if (e.textContent === `|x|`) {
+    else if (val === `|x|`) {
       calculatorInput.value += `|`;
-    } else if (e.textContent === `+/-`) {
+    } else if (val === `+/-`) {
       signDegToggleFlagFunc();
-    } else if (e.textContent == "1/x") {
+    } else if (val == "1/x") {
       regex = /(\d+)$/;
 
       if (regex.test(calculatorInput.value)) {
@@ -30,9 +32,9 @@ calculatorButtons.forEach((e) => {
       } else {
         calculatorInput.value += "1/";
       }
-    } else if (e.textContent == "x2") {
+    } else if (val == "x2") {
       calculatorInput.value += "^2";
-    } else if (e.textContent == "10x") {
+    } else if (val === "10x") {
       regex = /(\d+)$/;
       if (regex.test(calculatorInput.value)) {
         calculatorInput.value = calculatorInput.value.replace(
@@ -44,9 +46,9 @@ calculatorButtons.forEach((e) => {
       } else {
         calculatorInput.value += "10^";
       }
-    } else if (e.textContent == "xy") {
+    } else if (val == "xy") {
       calculatorInput.value += "^";
-    } else if (e.textContent == "2√x") {
+    } else if (val == "2√x") {
       regex = /(\d+)$/;
 
       if (regex.test(calculatorInput.value)) {
@@ -59,14 +61,9 @@ calculatorButtons.forEach((e) => {
       } else {
         calculatorInput.value += "√(";
       }
-    } else if (
-      e.textContent !== `=` &&
-      e.textContent !== `` &&
-      e.className !== "remove-data"
-    ) {
-      calculatorInput.value += e.textContent;
-      if (e.textContent == `ln` || e.textContent == `log`)
-        calculatorInput.value += `(`;
+    } else if (val !== `=` && val !== `` && e.className !== "remove-data") {
+      calculatorInput.value += val;
+      if (val == `ln` || val == `log`) calculatorInput.value += `(`;
     }
 
     calculatorInput.value = calculatorInput.value.replace(`n!`, `!`);
@@ -172,10 +169,17 @@ function resultFuncInitialEvaluation(newStr) {
 
 function resultFunc() {
   try {
-    let newStr = calculatorInput.value;
-    if (newStr == ``) return;
-    newStr = resultFuncInitialEvaluation(newStr);
+    let calculatorInputVal = calculatorInput.value;
+    if (calculatorInputVal == ``) return;
+    let newStr = resultFuncInitialEvaluation(calculatorInputVal);
     calculatorInput.value = eval(newStr);
+    if (!localStorage.getItem("history-array")) {
+      localStorage.setItem("history-array", JSON.stringify([]));
+    }
+
+    let arr = JSON.parse(localStorage.getItem("history-array"));
+    arr.push([`${calculatorInputVal}`, `${calculatorInput.value}`]);
+    localStorage.setItem("history-array", JSON.stringify(arr));
   } catch (err) {
     console.log(err);
     calculatorInput.value = `ERROR`;
@@ -307,4 +311,68 @@ function handleMplusAndMinus(ref) {
 function handleMS() {
   let num = eval(resultFuncInitialEvaluation(calculatorInput.value));
   localStorage.setItem("calculationOutput", num);
+}
+
+function handleHistory() {
+  document.getElementsByClassName("text-box")[0].style.display = "none";
+  document.getElementsByClassName("advanced-operations")[0].style.display =
+    "none";
+  document.getElementsByClassName("calculator-buttons")[0].style.display =
+    "none";
+
+  let closingHistoryButton = document.createElement("img");
+  closingHistoryButton.setAttribute(
+    "class",
+    "imageHW hamburger-menu close-history"
+  );
+  closingHistoryButton.setAttribute("src", "./images/x.png");
+  closingHistoryButton.setAttribute("alt", "closing history section button");
+  closingHistoryButton.setAttribute("onclick", "handleClosingHistorySection()");
+  document
+    .getElementsByClassName("enclosing-calculator")[0]
+    .appendChild(closingHistoryButton);
+
+  let newElement = document.createElement("div");
+  newElement.setAttribute("class", "history-section");
+  document
+    .getElementsByClassName("enclosing-calculator")[0]
+    .appendChild(newElement);
+
+  showHistoryContent();
+}
+
+function handleClosingHistorySection() {
+  document.getElementsByClassName("text-box")[0].style.display = "flex";
+  document.getElementsByClassName("advanced-operations")[0].style.display =
+    "block";
+  document.getElementsByClassName("calculator-buttons")[0].style.display =
+    "grid";
+
+  document.getElementsByClassName("close-history")[0].remove();
+  document.getElementsByClassName("history-section")[0].remove();
+}
+
+function showHistoryContent() {
+  let newElement = document.getElementsByClassName("history-section")[0];
+  newElement.innerHTML = `<div class = "history-title-clear-button">
+    <div class = "history-title">History</div>
+    <div class = "clear-history-button">
+    
+    <button onclick = "handleClearHistory()">Clear</button>
+    </div>
+    </div>`;
+  let arr = JSON.parse(localStorage.getItem("history-array"));
+  let historyHtmlCode = "";
+  for (let i = arr.length - 1; i >= 0; i--) {
+    historyHtmlCode += `<div class = "history-data">
+        <div>${arr[i][0]} &nbsp;= &nbsp;</div>
+        <div>${arr[i][1]} </div>
+    </div>`;
+  }
+  newElement.innerHTML += historyHtmlCode;
+}
+
+function handleClearHistory() {
+  localStorage.setItem("history-array", JSON.stringify([]));
+  showHistoryContent();
 }

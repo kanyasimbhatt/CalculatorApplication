@@ -8,122 +8,131 @@
   </head>
   <body>
     <div class="calculator-body">
-      <div class="text-box">
-        <input type="text" class="calculator-input" placeholder="0" />
-      </div>
-      <div class="advanced-operations">
-        <div class="deg-fe">
-          <div
-            class="deg-rad-button"
-            onclick="degreeRadianChange(this)"
+      <div class="enclosing-calculator">
+        <div class="text-box">
+          <img
+            onclick="handleHistory()"
+            src="./images/history.png"
+            class="imageHW hamburger-menu"
+            alt="visit history button"
             tabindex="0"
-          >
-            DEG
+          />
+          <input type="text" class="calculator-input" placeholder="0" />
+        </div>
+        <div class="advanced-operations">
+          <div class="deg-fe">
+            <div
+              class="deg-rad-button"
+              onclick="degreeRadianChange(this)"
+              tabindex="0"
+            >
+              DEG
+            </div>
+            <div tabindex="0" onclick="handleFractionToExponential(this)">
+              F-E
+            </div>
           </div>
-          <div tabindex="0" onclick="handleFractionToExponential(this)">
-            F-E
+          <div class="modular-operation">
+            <div class="gray" tabindex="0" onclick="handleMC()">MC</div>
+            <div class="gray" tabindex="0" onclick="handleMR()">MR</div>
+            <div tabindex="0" onclick="handleMplusAndMinus(this)" class="plus">
+              M+
+            </div>
+            <div tabindex="0" onclick="handleMplusAndMinus(this)" class="minus">
+              M-
+            </div>
+            <div tabindex="0" onclick="handleMS()">MS</div>
+          </div>
+          <div class="trignometry-functions">
+            <div>
+              <img
+                class="imageHW"
+                src="./images/right-triangle.png"
+                alt="delete content button"
+              />
+              <select
+                class="trig-func"
+                onchange="handleTrignometryFunction(this.value)"
+              >
+                <option>Trignometry</option>
+                <option>sin</option>
+                <option>cos</option>
+                <option>tan</option>
+                <option>cosec</option>
+                <option>sec</option>
+                <option>cot</option>
+              </select>
+            </div>
+            <div>
+              &#119891;
+              <select
+                class="advance-func"
+                onchange="handleAdvancedFunction(this.value)"
+              >
+                <option>Function</option>
+                <option>ceil</option>
+                <option>floor</option>
+              </select>
+            </div>
           </div>
         </div>
-        <div class="modular-operation">
-          <div class="gray" tabindex="0" onclick="handleMC()">MC</div>
-          <div class="gray" tabindex="0" onclick="handleMR()">MR</div>
-          <div tabindex="0" onclick="handleMplusAndMinus(this)" class="plus">
-            M+
+        <div class="calculator-buttons">
+          <div tabindex="0">
+            <p>2<sup>nd</sup></p>
           </div>
-          <div tabindex="0" onclick="handleMplusAndMinus(this)" class="minus">
-            M-
-          </div>
-          <div tabindex="0" onclick="handleMS()">MS</div>
-        </div>
-        <div class="trignometry-functions">
-          <div>
+          <div tabindex="0">&pi;</div>
+          <div tabindex="0"><p>e</p></div>
+          <div tabindex="0" class="reset-all">C</div>
+          <div tabindex="0" class="remove-data">
             <img
               class="imageHW"
-              src="./images/right-triangle.png"
+              src="./images/delete.png"
               alt="delete content button"
             />
-            <select
-              class="trig-func"
-              onchange="handleTrignometryFunction(this.value)"
-            >
-              <option>Trignometry</option>
-              <option>sin</option>
-              <option>cos</option>
-              <option>tan</option>
-              <option>cosec</option>
-              <option>sec</option>
-              <option>cot</option>
-            </select>
           </div>
-          <div>
-            &#119891;
-            <select
-              class="advance-func"
-              onchange="handleAdvancedFunction(this.value)"
-            >
-              <option>Function</option>
-              <option>ceil</option>
-              <option>floor</option>
-            </select>
+          <div tabindex="0">
+            <p>x<sup>2</sup></p>
           </div>
+          <div tabindex="0">
+            <p><sup>1</sup>/x</p>
+          </div>
+          <div tabindex="0">|x|</div>
+          <div tabindex="0">exp</div>
+          <div tabindex="0">mod</div>
+          <div tabindex="0">
+            <p><sup>2</sup>&Sqrt;x</p>
+          </div>
+          <div tabindex="0">&lpar;</div>
+          <div tabindex="0">&rpar;</div>
+          <div tabindex="0">n!</div>
+          <div tabindex="0">&divide;</div>
+          <div tabindex="0">
+            <p>x<sup>y</sup></p>
+          </div>
+          <div tabindex="0" id="calculator-buttons-numbers">7</div>
+          <div tabindex="0" id="calculator-buttons-numbers">8</div>
+          <div tabindex="0" id="calculator-buttons-numbers">9</div>
+          <div tabindex="0">X</div>
+          <div tabindex="0">
+            <p>10<sup>x</sup></p>
+          </div>
+          <div tabindex="0" id="calculator-buttons-numbers">4</div>
+          <div tabindex="0" id="calculator-buttons-numbers">5</div>
+          <div tabindex="0" id="calculator-buttons-numbers">6</div>
+          <div tabindex="0">-</div>
+          <div tabindex="0">log</div>
+          <div tabindex="0" id="calculator-buttons-numbers">1</div>
+          <div tabindex="0" id="calculator-buttons-numbers">2</div>
+          <div tabindex="0" id="calculator-buttons-numbers">3</div>
+          <div tabindex="0">+</div>
+          <div tabindex="0">ln</div>
+          <div tabindex="0" id="calculator-buttons-numbers" class="toggle-sign">
+            <p><sup>+</sup>/<sub>-</sub></p>
+          </div>
+          <div tabindex="0" id="calculator-buttons-numbers">0</div>
+          <div tabindex="0" id="calculator-buttons-numbers">.</div>
+          <div tabindex="0" id="calculator-buttons-result">=</div>
         </div>
-      </div>
-      <div class="calculator-buttons">
-        <div tabindex="0">
-          <p>2<sup>nd</sup></p>
-        </div>
-        <div tabindex="0">&pi;</div>
-        <div tabindex="0"><p>e</p></div>
-        <div tabindex="0" class="reset-all">C</div>
-        <div tabindex="0" class="remove-data">
-          <img
-            class="imageHW"
-            src="./images/delete.png"
-            alt="delete content button"
-          />
-        </div>
-        <div tabindex="0">
-          <p>x<sup>2</sup></p>
-        </div>
-        <div tabindex="0">
-          <p><sup>1</sup>/x</p>
-        </div>
-        <div tabindex="0">|x|</div>
-        <div tabindex="0">exp</div>
-        <div tabindex="0">mod</div>
-        <div tabindex="0">
-          <p><sup>2</sup>&Sqrt;x</p>
-        </div>
-        <div tabindex="0">&lpar;</div>
-        <div tabindex="0">&rpar;</div>
-        <div tabindex="0">n!</div>
-        <div tabindex="0">&divide;</div>
-        <div tabindex="0">
-          <p>x<sup>y</sup></p>
-        </div>
-        <div tabindex="0" id="calculator-buttons-numbers">7</div>
-        <div tabindex="0" id="calculator-buttons-numbers">8</div>
-        <div tabindex="0" id="calculator-buttons-numbers">9</div>
-        <div tabindex="0">X</div>
-        <div tabindex="0">
-          <p>10<sup>x</sup></p>
-        </div>
-        <div tabindex="0" id="calculator-buttons-numbers">4</div>
-        <div tabindex="0" id="calculator-buttons-numbers">5</div>
-        <div tabindex="0" id="calculator-buttons-numbers">6</div>
-        <div tabindex="0">-</div>
-        <div tabindex="0">log</div>
-        <div tabindex="0" id="calculator-buttons-numbers">1</div>
-        <div tabindex="0" id="calculator-buttons-numbers">2</div>
-        <div tabindex="0" id="calculator-buttons-numbers">3</div>
-        <div tabindex="0">+</div>
-        <div tabindex="0">ln</div>
-        <div tabindex="0" id="calculator-buttons-numbers" class="toggle-sign">
-          <p><sup>+</sup>/<sub>-</sub></p>
-        </div>
-        <div tabindex="0" id="calculator-buttons-numbers">0</div>
-        <div tabindex="0" id="calculator-buttons-numbers">.</div>
-        <div tabindex="0" id="calculator-buttons-result">=</div>
       </div>
     </div>
     <script src="./script.js"></script>
