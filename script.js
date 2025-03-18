@@ -4,74 +4,157 @@ const calculatorButtons = document.querySelectorAll(
 );
 const calculatorInput = document.querySelector(`.calculator-input`);
 calculatorInput.value = ``;
-const removeContentButton = document.querySelector(`.remove-data`);
 let regex;
+
+document.addEventListener("keyup", (event) => {
+  const validKeyboardCharacters = [
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "+",
+    "-",
+    "/",
+    "X",
+    "%",
+    "e",
+    "^",
+  ];
+
+  if (event.key === "Backspace" || event.key === "Delete") {
+    calculatorInput.value = calculatorInput.value.slice(0, -1);
+  }
+  if (event.key === "=" || event.key === "Enter") {
+    resultFunc();
+  }
+  if (validKeyboardCharacters.indexOf(event.key) !== -1) {
+    calculatorInput.value += event.key;
+  }
+});
 
 //adding an event listener to each button in calculator
 calculatorButtons.forEach((e) => {
   e.addEventListener(`click`, () => {
     let val = e.textContent;
-    val = val.trim(); //it automatically added some white space so had to add it to remove them
-    if (val === "=") resultFunc();
-    else if (val === `C`) calculatorInput.value = ``;
-    else if (calculatorInput.value === "ERROR") return;
-    else if (val === `|x|`) {
-      calculatorInput.value += `|`;
-    } else if (val === `+/-`) {
-      signDegToggleFlagFunc();
-    } else if (val == "1/x") {
-      regex = /(\d+)$/;
 
-      if (regex.test(calculatorInput.value)) {
-        calculatorInput.value = calculatorInput.value.replace(
-          regex,
-          (match, num) => {
-            return `1/${num}`;
-          }
-        );
-      } else {
-        calculatorInput.value += "1/";
-      }
-    } else if (val == "x2") {
-      calculatorInput.value += "^2";
-    } else if (val === "10x") {
-      regex = /(\d+)$/;
-      if (regex.test(calculatorInput.value)) {
-        calculatorInput.value = calculatorInput.value.replace(
-          regex,
-          (match, num) => {
-            return `10^${num}`;
-          }
-        );
-      } else {
-        calculatorInput.value += "10^";
-      }
-    } else if (val == "xy") {
-      calculatorInput.value += "^";
-    } else if (val == "2√x") {
-      regex = /(\d+)$/;
-
-      if (regex.test(calculatorInput.value)) {
-        calculatorInput.value = calculatorInput.value.replace(
-          regex,
-          (match, num) => {
-            return `${num}X√(`;
-          }
-        );
-      } else {
-        calculatorInput.value += "√(";
-      }
-    } else if (val !== `=` && val !== `` && e.className !== "remove-data") {
-      calculatorInput.value += val;
-      if (val == `ln` || val == `log`) calculatorInput.value += `(`;
+    if (e.className === "remove-data") {
+      return;
     }
+    val = val.trim(); //it automatically added some white space so had to add it to remove them
 
-    calculatorInput.value = calculatorInput.value.replace(`n!`, `!`);
-    calculatorInput.value = calculatorInput.value.replace(`mod`, `%`);
+    switch (val) {
+      case "=":
+        resultFunc();
+        break;
+
+      case "C":
+        calculatorInput.value = "";
+        break;
+
+      case `|x|`:
+        calculatorInput.value += `|`;
+        break;
+
+      case `+/-`:
+        signDegToggleFlagFunc();
+        break;
+
+      case `1/x`:
+        regex = /(\d+)\.?0*(\d*)$/g;
+
+        if (regex.test(calculatorInput.value)) {
+          calculatorInput.value = calculatorInput.value.replace(
+            regex,
+            (match, num1, num2) => {
+              if (num2) return `1/${num1}.${num2}`;
+              else return `1/${num1}`;
+            }
+          );
+        } else calculatorInput.value += `1/`;
+
+        break;
+
+      case `x2`:
+        calculatorInput.value += "^2";
+        break;
+
+      case `x3`:
+        calculatorInput.value += `^3`;
+        break;
+
+      case "n!":
+        calculatorInput.value += "!";
+        break;
+
+      case `10x`:
+        regex = /(\d+)\.?0*(\d*)$/g;
+        if (regex.test(calculatorInput.value)) {
+          calculatorInput.value = calculatorInput.value.replace(
+            regex,
+            (match, num1, num2) => {
+              if (num2) return `10^${num1}.${num2}`;
+              else return `10^${num1}`;
+            }
+          );
+        } else {
+          calculatorInput.value += "10^";
+        }
+        break;
+
+      case `xy`:
+        calculatorInput.value += "^";
+        break;
+
+      case `2nd`:
+        break;
+
+      case `3√x`:
+        regex = /(\d+)$/;
+
+        if (regex.test(calculatorInput.value)) {
+          calculatorInput.value = calculatorInput.value.replace(
+            regex,
+            (match, num) => {
+              return `${num}X√(`;
+            }
+          );
+        } else {
+          calculatorInput.value += "√(";
+        }
+
+        break;
+
+      case `2√x`:
+        regex = /(\d+)$/;
+
+        if (regex.test(calculatorInput.value)) {
+          calculatorInput.value = calculatorInput.value.replace(
+            regex,
+            (match, num) => {
+              return `${num}X√(`;
+            }
+          );
+        } else {
+          calculatorInput.value += "√(";
+        }
+
+        break;
+
+      default:
+        if (calculatorInput.value === "ERROR") return;
+        calculatorInput.value += val;
+        if (val == `ln` || val == `log`) calculatorInput.value += `(`;
+    }
   });
 });
 
-removeContentButton.addEventListener(`click`, () => {
+document.querySelector(`.remove-data`).addEventListener(`click`, () => {
   let inputVal = calculatorInput.value;
   if (inputVal === `ERROR`) {
     calculatorInput.value = ``;
@@ -98,13 +181,39 @@ function conversionBetweenDegRad(value) {
   }
 }
 
+let secondOperationToggle = 0;
+function handleSecondSetOfOperations(e) {
+  e.classList.toggle("selected");
+
+  if (secondOperationToggle === 0) {
+    document.getElementsByClassName(
+      "square-button"
+    )[0].innerHTML = `x<sup>3</sup>`;
+    document.getElementsByClassName(
+      "square-root-button"
+    )[0].innerHTML = `<sup>3</sup>&Sqrt;x`;
+    secondOperationToggle = 1;
+  } else {
+    document.getElementsByClassName(
+      "square-button"
+    )[0].innerHTML = `x<sup>2</sup>`;
+    document.getElementsByClassName(
+      "square-root-button"
+    )[0].innerHTML = `<sup>2</sup>&Sqrt;x`;
+    secondOperationToggle = 0;
+  }
+}
+
 function replaceAll(newStr) {
   newStr = newStr.replace(`X`, `*`);
   newStr = newStr.replace(`÷`, `/`);
+  newStr = newStr.replace("mod", "%");
   newStr = newStr.replace("π", `${Math.PI}`);
   newStr = newStr.replace("^", "**");
+  if (secondOperationToggle === 1) {
+    calculatorInput.value = calculatorInput.value.replace(`√`, "Math.cbrt");
+  }
   newStr = newStr.replace("√", "Math.sqrt");
-
   newStr = newStr.replace(
     /sin\((.+)\)/g,
     `Math.sin(conversionBetweenDegRad($1)).toFixed(2)`
@@ -195,6 +304,7 @@ function opInclude(str, opArr) {
 
 function signDegToggleFlagFunc() {
   let str = calculatorInput.value;
+  if (str === "") return;
   let input = [];
   for (let a of str) {
     input.push(a);
@@ -364,7 +474,7 @@ function showHistoryContent() {
   let arr = JSON.parse(localStorage.getItem("history-array"));
   let historyHtmlCode = "";
   for (let i = arr.length - 1; i >= 0; i--) {
-    historyHtmlCode += `<div class = "history-data">
+    historyHtmlCode += `<div class = "history-data" onclick = "handleClickOnHistoryData(${arr[i][1]})">
         <div>${arr[i][0]} &nbsp;= &nbsp;</div>
         <div>${arr[i][1]} </div>
     </div>`;
@@ -375,4 +485,15 @@ function showHistoryContent() {
 function handleClearHistory() {
   localStorage.setItem("history-array", JSON.stringify([]));
   showHistoryContent();
+}
+
+function handleClickOnHistoryData(value) {
+  handleClosingHistorySection();
+  regex = /(\d+)$/;
+  if (regex.test(calculatorInput.value)) {
+    calculatorInput.value += `X`;
+    calculatorInput.value += `${value}`;
+  } else {
+    calculatorInput.value += `${value}`;
+  }
 }
