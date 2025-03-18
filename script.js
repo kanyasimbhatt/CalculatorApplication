@@ -368,6 +368,8 @@ function handleAdvancedFunction(funcName) {
 }
 
 function degreeRadianChange(ref) {
+  ref.textContent = ref.textContent.trim();
+
   ref.textContent = ref.textContent === "DEG" ? "RAD" : "DEG";
 }
 
