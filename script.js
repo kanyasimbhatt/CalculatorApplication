@@ -499,3 +499,71 @@ function handleClickOnHistoryData(value) {
     calculatorInput.value += `${value}`;
   }
 }
+
+let darkLightFlag = 0;
+function handleDarkLightMode() {
+  document
+    .getElementsByClassName("dark-light-button")[0]
+    .classList.toggle("selected");
+  calculatorInput.classList.toggle("dark-calculator-input");
+  document.body.classList.toggle("dark-body");
+  document
+    .getElementsByClassName("enclosing-calculator")[0]
+    .classList.toggle("dark-enclosing-calculator");
+  document
+    .getElementsByClassName("dark-light-button")[0]
+    .classList.toggle("selected");
+
+  if (darkLightFlag === 0) {
+    darkLightFlag = 1;
+    document
+      .getElementsByClassName("view-history")[0]
+      .setAttribute("src", "./images/history1.png");
+    document
+      .getElementsByClassName("dark-light-button")[0]
+      .setAttribute("src", "./images/brightness-and-contrast1.png");
+    document
+      .getElementsByClassName("remove-data-icon")[0]
+      .setAttribute("src", "./images/delete1.png");
+    document
+      .getElementsByClassName("trignometry-function-icon")[0]
+      .setAttribute("src", "./images/right-triangle1.png");
+    document.querySelectorAll(".calculator-buttons > div").forEach((e) => {
+      e.style.backgroundColor = "rgb(31, 32, 33)";
+    });
+    document.querySelectorAll("#calculator-buttons-numbers").forEach((e) => {
+      e.style.backgroundColor = "black";
+    });
+
+    document
+      .querySelectorAll(".trignometry-functions > div > select")
+      .forEach((e) => {
+        e.style.color = "white";
+      });
+  } else {
+    darkLightFlag = 0;
+    document
+      .getElementsByClassName("view-history")[0]
+      .setAttribute("src", "./images/history.png");
+    document
+      .getElementsByClassName("dark-light-button")[0]
+      .setAttribute("src", "./images/brightness-and-contrast.png");
+    document
+      .getElementsByClassName("remove-data-icon")[0]
+      .setAttribute("src", "./images/delete.png");
+    document
+      .getElementsByClassName("trignometry-function-icon")[0]
+      .setAttribute("src", "./images/right-triangle.png");
+    document.querySelectorAll(".calculator-buttons > div").forEach((e) => {
+      e.style.backgroundColor = "rgb(248, 249, 250)";
+    });
+    document.querySelectorAll("#calculator-buttons-numbers").forEach((e) => {
+      e.style.backgroundColor = "white";
+    });
+    document
+      .querySelectorAll(".trignometry-functions > div > select")
+      .forEach((e) => {
+        e.style.color = "black";
+      });
+  }
+}

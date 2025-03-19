@@ -13,14 +13,15 @@
           <img
             onclick="handleHistory()"
             src="./images/history.png"
-            class="imageHW hamburger-menu"
+            class="imageHW hamburger-menu view-history"
             alt="visit history button"
             tabindex="0"
           />
           <img
             src="./images/brightness-and-contrast.png"
             alt="button for light and dark mode"
-            class="imageHW hamburger-menu"
+            class="imageHW hamburger-menu dark-light-button"
+            onclick="handleDarkLightMode()"
             tabindex="0"
           />
           <input type="text" class="calculator-input" placeholder="0" />
@@ -52,7 +53,7 @@
           <div class="trignometry-functions">
             <div>
               <img
-                class="imageHW"
+                class="imageHW trignometry-function-icon"
                 src="./images/right-triangle.png"
                 alt="delete content button"
               />
@@ -94,7 +95,7 @@
           <div tabindex="0" class="reset-all">C</div>
           <div tabindex="0" class="remove-data">
             <img
-              class="imageHW"
+              class="imageHW remove-data-icon"
               src="./images/delete.png"
               alt="delete content button"
             />
