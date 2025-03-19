@@ -1,0 +1,237 @@
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+/* Color related Styles */
+.gray {
+  color: gray;
+}
+
+.imageHW {
+  height: 20px;
+  width: 20px;
+}
+
+#calculator-buttons-numbers {
+  background-color: #ffffff;
+  font-weight: bolder;
+}
+
+#calculator-buttons-result {
+  background-color: lightblue;
+}
+
+/* Styles for calculator body */
+.calculator-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+}
+
+/* Styles for calculator input */
+.text-box {
+  width: 500px;
+  height: 150px;
+  background-color: #eff1f3;
+  border-radius: 20px 20px 0 0;
+}
+
+.calculator-input {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  border: none;
+  text-align: end;
+  font-size: 50px;
+  font-weight: bolder;
+}
+
+.calculator-input:focus {
+  background-color: transparent;
+}
+
+.calculator-input::placeholder {
+  color: black;
+}
+/* Styles for advanced operation UI */
+.advanced-operations {
+  height: 200px;
+  width: 500px;
+  background-color: #eff1f3;
+}
+
+.deg-fe {
+  display: flex;
+  gap: 70px;
+  height: 40%;
+  width: 100%;
+  font-weight: bold;
+  align-items: center;
+  margin-left: 30px;
+}
+
+.deg-fe > div {
+  cursor: pointer;
+}
+
+.deg-fe > div:hover {
+  opacity: 0.4;
+}
+/* Styles for history related UI */
+.modular-operation {
+  display: flex;
+  gap: 5px;
+  height: 30%;
+  align-items: center;
+}
+
+.modular-operation > div {
+  flex: 1;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+}
+
+.modular-operation > div:hover {
+  opacity: 0.4;
+}
+/* Styles for dropdown for functions and trignometry related functions */
+.trignometry-functions {
+  display: flex;
+  gap: 70px;
+  height: 30%;
+  align-items: center;
+  margin-left: 30px;
+}
+
+.trignometry-functions > div {
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.trignometry-functions > div:hover {
+  opacity: 0.4;
+}
+
+.trignometry-functions > div > select {
+  border: none;
+  background-color: transparent;
+}
+/* Styles for calculator buttons */
+.calculator-buttons {
+  width: 500px;
+  height: 500px;
+  background-color: #eff1f3;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(7, 1fr);
+  gap: 5px;
+}
+
+.calculator-buttons > div {
+  background-color: #f8f9fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.calculator-buttons > div:hover {
+  opacity: 0.4;
+}
+
+/* Responsivity */
+@media screen and (max-width: 520px) {
+  body {
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+
+  .text-box {
+    width: 400px;
+    position: fixed;
+    top: 0;
+  }
+
+  .advanced-operations {
+    width: 400px;
+    position: fixed;
+    top: 150px;
+  }
+
+  .calculator-buttons {
+    width: 400px;
+    height: 450px;
+    position: fixed;
+    top: 350px;
+  }
+}
+
+@media screen and (max-width: 410px) {
+  body {
+    overflow: hidden;
+  }
+
+  .text-box {
+    width: 350px;
+    position: fixed;
+    top: 0;
+  }
+
+  .advanced-operations {
+    width: 350px;
+    position: fixed;
+    top: 150px;
+  }
+
+  .calculator-buttons {
+    width: 350px;
+  }
+}
+
+@media screen and (max-height: 803px) {
+  .text-box {
+    position: fixed;
+    top: 0;
+  }
+  .advanced-operations {
+    height: 100px;
+    position: fixed;
+    top: 150px;
+  }
+  .calculator-buttons {
+    position: fixed;
+    top: 250px;
+  }
+}
+
+@media screen and (max-height: 710px) {
+  .text-box {
+    height: 80px;
+    position: fixed;
+    top: 0;
+  }
+
+  .advanced-operations {
+    position: fixed;
+    top: 80px;
+  }
+
+  .calculator-buttons {
+    position: fixed;
+    top: 180px;
+  }
+}
+
+@media screen and (max-height: 630px) {
+  .calculator-buttons {
+    height: 300px;
+    gap: 0px;
+  }
+}
