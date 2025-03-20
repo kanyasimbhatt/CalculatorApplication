@@ -9,81 +9,353 @@
   <body>
     <!--Main Calculator body-->
     <div class="calculator-body">
-      <div class="text-box">
-        <input type="text" class="calculator-input" placeholder="0" />
-      </div>
-      <!-- UI for advanced Operations -->
-      <div class="advanced-operations">
-        <div class="deg-fe">
-          <div>DEG</div>
-          <div>F-E</div>
+      <div class="enclosing-calculator">
+        <div class="text-box">
+          <img
+            src="./images/history.png"
+            class="imageHW hamburger-menu view-history"
+            alt="visit history button"
+            onclick="handleHistory()"
+            tabindex="0"
+          />
+          <img
+            src="./images/brightness-and-contrast.png"
+            alt="button for light and dark mode"
+            class="imageHW hamburger-menu dark-light-button"
+            onclick="handleDarkLightMode()"
+            tabindex="0"
+          />
+          <input type="text" class="calculator-input" placeholder="0" />
         </div>
-    <!--Calculator's History related UI-->
-        <div class="modular-operation">
-          <div class="gray">MC</div>
-          <div class="gray">MR</div>
-          <div>M+</div>
-          <div>M-</div>
-          <div>MS</div>
-        </div>
-    <!--Drop downs for both functions and trignometry related functions-->
-        <div class="trignometry-functions">
-          <div>
-            <img class = "imageHW" src="./images/right-triangle.png" alt="delete content button"> 
-            <select class = "trig-func" onchange="handleTrignometryFunction(this.value)">
+        <div class="advanced-operations">
+          <div class="deg-fe">
+            <div
+              class="deg-rad-button"
+              onclick="degreeRadianChange(this)"
+              tabindex="0"
+            >
+              DEG
+            </div>
+            <div tabindex="0" onclick="handleFractionToExponential(this)">
+              F-E
+            </div>
+          </div>
+          <div class="modular-operation">
+            <div class="gray" tabindex="0" onclick="handleMC()">MC</div>
+            <div class="gray" tabindex="0" onclick="handleMR()">MR</div>
+            <div tabindex="0" onclick="handleMplusAndMinus(this)" class="plus">
+              M+
+            </div>
+            <div tabindex="0" onclick="handleMplusAndMinus(this)" class="minus">
+              M-
+            </div>
+            <div tabindex="0" onclick="handleMS()">MS</div>
+          </div>
+          <div class="trignometry-functions">
+            <div>
+              <img
+                class="imageHW trignometry-function-icon"
+                src="./images/right-triangle.png"
+                alt="delete content button"
+              />
+              <select
+                class="trig-func"
+                onchange="handleTrignometryFunction(this.value)"
+              >
                 <option>Trignometry</option>
                 <option>sin</option>
                 <option>cos</option>
                 <option>tan</option>
-            </select>
-        </div>
-          <div>&#119891  
-            <select onchange="handleAdvancedFunction(this.value)">
+                <option>cosec</option>
+                <option>sec</option>
+                <option>cot</option>
+              </select>
+            </div>
+            <div>
+              &#119891;
+              <select
+                class="advance-func"
+                onchange="handleAdvancedFunction(this.value)"
+              >
                 <option>Function</option>
-                <option>Ceil()</option>
-                <option>Floor()</option>
-            </select>
+                <option>ceil</option>
+                <option>floor</option>
+              </select>
+            </div>
           </div>
         </div>
-      </div>
-    <!--Basic Calculator operations-->
-
-      <div class="calculator-buttons">
-        <div aria-label = "calculator operation buttons" role="button"><p>2<sup>nd<sup></p></div>
-        <div aria-label = "calculator operation buttons" role="button">&pi;</div>
-        <div aria-label = "calculator operation buttons" role="button"><p>e</p></div>
-        <div aria-label = "calculator operation buttons" role="button" class="reset-all">C</div>
-        <div aria-label = "calculator operation buttons" role="button" class = "remove-data"><img class = "imageHW" src="./images/delete.png" alt="delete content button"></div>
-        <div aria-label = "calculator operation buttons" role="button"><p>x<sup>2</sup></p></div>
-        <div aria-label = "calculator operation buttons" role="button"><p><sup>1</sup>/x</p></div>
-        <div aria-label = "calculator operation buttons" role="button">|x|</div>
-        <div aria-label = "calculator operation buttons" role="button">exp</div>
-        <div aria-label = "calculator operation buttons" role="button">mod</div>
-        <div aria-label = "calculator operation buttons" role="button"><p><sup>2</sup>&Sqrt;x</p></div>
-        <div aria-label = "calculator operation buttons" role="button">&lpar;</div>
-        <div aria-label = "calculator operation buttons" role="button">&rpar;</div>
-        <div aria-label = "calculator operation buttons" role="button">n!</div>
-        <div aria-label = "calculator operation buttons" role="button">&divide;</div>
-        <div aria-label = "calculator operation buttons" role="button"><p>x<sup>y</sup></p></div>
-        <div aria-label = "calculator operation buttons" role="button" id = "calculator-buttons-numbers">7</div>
-        <div aria-label = "calculator operation buttons" role="button" id = "calculator-buttons-numbers">8</div>
-        <div aria-label = "calculator operation buttons" role="button" id = "calculator-buttons-numbers">9</div>
-        <div aria-label = "calculator operation buttons" role="button" >X</div>
-        <div aria-label = "calculator operation buttons" role="button"><p>10<sup>x</sup></p></div>
-        <div aria-label = "calculator operation buttons" role="button" id = "calculator-buttons-numbers">4</div>
-        <div aria-label = "calculator operation buttons" role="button" id = "calculator-buttons-numbers">5</div>
-        <div aria-label = "calculator operation buttons" role="button" id = "calculator-buttons-numbers">6</div>
-        <div aria-label = "calculator operation buttons" role="button">-</div>
-        <div aria-label = "calculator operation buttons" role="button">log</div>
-        <div aria-label = "calculator operation buttons" role="button" id = "calculator-buttons-numbers">1</div>
-        <div aria-label = "calculator operation buttons" role="button" id = "calculator-buttons-numbers">2</div>
-        <div aria-label = "calculator operation buttons" role="button" id = "calculator-buttons-numbers">3</div>
-        <div aria-label = "calculator operation buttons" role="button">+</div>
-        <div aria-label = "calculator operation buttons" role="button">ln</div>
-        <div aria-label = "calculator operation buttons" role="button"  id = "calculator-buttons-numbers" class="toggle-sign"><p><sup>+</sup>/<sub>-</sub></p></div>
-        <div aria-label = "calculator operation buttons" role="button" id = "calculator-buttons-numbers">0</div>
-        <div aria-label = "calculator operation buttons" role="button"  id = "calculator-buttons-numbers">.</div>
-        <div aria-label = "calculator operation buttons" role="button" id = "calculator-buttons-result">=</div>
+        <div
+          class="calculator-buttons"
+          onclick="handleClickOnCalculator(event)"
+        >
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+            onclick="handleSecondSetOfOperations(this)"
+          >
+            <p>2<sup>nd</sup></p>
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+          >
+            &pi;
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+          >
+            <p>e</p>
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+            class="reset-all"
+          >
+            C
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+            class="remove-data"
+            onclick="removeDataFromInput()"
+          >
+            <img
+              class="imageHW remove-data-icon"
+              src="./images/delete.png"
+              alt="delete content button"
+            />
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+          >
+            <p class="square-button">x<sup>2</sup></p>
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+          >
+            <p><sup>1</sup>/x</p>
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+          >
+            |x|
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+          >
+            exp
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+          >
+            mod
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+          >
+            <p class="square-root-button"><sup>2</sup>&Sqrt;x</p>
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+          >
+            &lpar;
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+          >
+            &rpar;
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+          >
+            n!
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+          >
+            &divide;
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+          >
+            <p>x<sup>y</sup></p>
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+            id="calculator-buttons-numbers"
+          >
+            7
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+            id="calculator-buttons-numbers"
+          >
+            8
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+            id="calculator-buttons-numbers"
+          >
+            9
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+          >
+            X
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+          >
+            <p>10<sup>x</sup></p>
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+            id="calculator-buttons-numbers"
+          >
+            4
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+            id="calculator-buttons-numbers"
+          >
+            5
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+            id="calculator-buttons-numbers"
+          >
+            6
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+          >
+            -
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+          >
+            log
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+            id="calculator-buttons-numbers"
+          >
+            1
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+            id="calculator-buttons-numbers"
+          >
+            2
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+            id="calculator-buttons-numbers"
+          >
+            3
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+          >
+            +
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+          >
+            ln
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+            id="calculator-buttons-numbers"
+            class="toggle-sign"
+          >
+            <p><sup>+</sup>/<sub>-</sub></p>
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+            id="calculator-buttons-numbers"
+          >
+            0
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+            id="calculator-buttons-numbers"
+          >
+            .
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+            id="calculator-buttons-result"
+          >
+            =
+          </div>
+        </div>
       </div>
     </div>
     <script src="./script.js"></script>
