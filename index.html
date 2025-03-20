@@ -88,61 +88,273 @@
           class="calculator-buttons"
           onclick="handleClickOnCalculator(event)"
         >
-          <div tabindex="0" onclick="handleSecondSetOfOperations(this)">
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+            onclick="handleSecondSetOfOperations(this)"
+          >
             <p>2<sup>nd</sup></p>
           </div>
-          <div tabindex="0">&pi;</div>
-          <div tabindex="0"><p>e</p></div>
-          <div tabindex="0" class="reset-all">C</div>
-          <div tabindex="0" class="remove-data" onclick="removeDataFromInput()">
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+          >
+            &pi;
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+          >
+            <p>e</p>
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+            class="reset-all"
+          >
+            C
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+            class="remove-data"
+            onclick="removeDataFromInput()"
+          >
             <img
               class="imageHW remove-data-icon"
               src="./images/delete.png"
               alt="delete content button"
             />
           </div>
-          <div tabindex="0">
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+          >
             <p class="square-button">x<sup>2</sup></p>
           </div>
-          <div tabindex="0">
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+          >
             <p><sup>1</sup>/x</p>
           </div>
-          <div tabindex="0">|x|</div>
-          <div tabindex="0">exp</div>
-          <div tabindex="0">mod</div>
-          <div tabindex="0">
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+          >
+            |x|
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+          >
+            exp
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+          >
+            mod
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+          >
             <p class="square-root-button"><sup>2</sup>&Sqrt;x</p>
           </div>
-          <div tabindex="0">&lpar;</div>
-          <div tabindex="0">&rpar;</div>
-          <div tabindex="0">n!</div>
-          <div tabindex="0">&divide;</div>
-          <div tabindex="0">
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+          >
+            &lpar;
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+          >
+            &rpar;
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+          >
+            n!
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+          >
+            &divide;
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+          >
             <p>x<sup>y</sup></p>
           </div>
-          <div tabindex="0" id="calculator-buttons-numbers">7</div>
-          <div tabindex="0" id="calculator-buttons-numbers">8</div>
-          <div tabindex="0" id="calculator-buttons-numbers">9</div>
-          <div tabindex="0">X</div>
-          <div tabindex="0">
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+            id="calculator-buttons-numbers"
+          >
+            7
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+            id="calculator-buttons-numbers"
+          >
+            8
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+            id="calculator-buttons-numbers"
+          >
+            9
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+          >
+            X
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+          >
             <p>10<sup>x</sup></p>
           </div>
-          <div tabindex="0" id="calculator-buttons-numbers">4</div>
-          <div tabindex="0" id="calculator-buttons-numbers">5</div>
-          <div tabindex="0" id="calculator-buttons-numbers">6</div>
-          <div tabindex="0">-</div>
-          <div tabindex="0">log</div>
-          <div tabindex="0" id="calculator-buttons-numbers">1</div>
-          <div tabindex="0" id="calculator-buttons-numbers">2</div>
-          <div tabindex="0" id="calculator-buttons-numbers">3</div>
-          <div tabindex="0">+</div>
-          <div tabindex="0">ln</div>
-          <div tabindex="0" id="calculator-buttons-numbers" class="toggle-sign">
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+            id="calculator-buttons-numbers"
+          >
+            4
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+            id="calculator-buttons-numbers"
+          >
+            5
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+            id="calculator-buttons-numbers"
+          >
+            6
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+          >
+            -
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+          >
+            log
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+            id="calculator-buttons-numbers"
+          >
+            1
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+            id="calculator-buttons-numbers"
+          >
+            2
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+            id="calculator-buttons-numbers"
+          >
+            3
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+          >
+            +
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+          >
+            ln
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+            id="calculator-buttons-numbers"
+            class="toggle-sign"
+          >
             <p><sup>+</sup>/<sub>-</sub></p>
           </div>
-          <div tabindex="0" id="calculator-buttons-numbers">0</div>
-          <div tabindex="0" id="calculator-buttons-numbers">.</div>
-          <div tabindex="0" id="calculator-buttons-result">=</div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+            id="calculator-buttons-numbers"
+          >
+            0
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+            id="calculator-buttons-numbers"
+          >
+            .
+          </div>
+          <div
+            aria-label="calculator operation buttons"
+            role="button"
+            tabindex="0"
+            id="calculator-buttons-result"
+          >
+            =
+          </div>
         </div>
       </div>
     </div>
