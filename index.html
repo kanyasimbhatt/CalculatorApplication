@@ -12,10 +12,10 @@
       <div class="enclosing-calculator">
         <div class="text-box">
           <img
-            onclick="handleHistory()"
             src="./images/history.png"
             class="imageHW hamburger-menu view-history"
             alt="visit history button"
+            onclick="handleHistory()"
             tabindex="0"
           />
           <img
@@ -94,7 +94,7 @@
           <div tabindex="0">&pi;</div>
           <div tabindex="0"><p>e</p></div>
           <div tabindex="0" class="reset-all">C</div>
-          <div tabindex="0" class="remove-data">
+          <div tabindex="0" class="remove-data" onclick="removeDataFromInput()">
             <img
               class="imageHW remove-data-icon"
               src="./images/delete.png"

@@ -1,11 +1,9 @@
 //common elements
-const calculatorButtons = document.querySelectorAll(
-  `.calculator-buttons > div`
-);
 const calculatorInput = document.querySelector(`.calculator-input`);
 calculatorInput.value = ``;
 let regex;
 
+//keyboard input feature
 document.addEventListener("keyup", (event) => {
   const validKeyboardCharacters = [
     "0",
@@ -41,9 +39,11 @@ document.addEventListener("keyup", (event) => {
   }
 });
 
-//adding an event listener to each button in calculator
+//event delegated event for all buttons
 function handleClickOnCalculator(event) {
   let e = event.target;
+  if (e.classList.value === "calculator-buttons") return;
+
   let val = e.textContent;
 
   if (e.className === "remove-data") {
@@ -110,15 +110,17 @@ function handleClickOnCalculator(event) {
   }
 }
 
-document.querySelector(`.remove-data`).addEventListener(`click`, () => {
+//deleting characters from input
+function removeDataFromInput() {
   let inputVal = calculatorInput.value;
   if (inputVal === `ERROR`) {
     calculatorInput.value = ``;
   } else if (inputVal != ``) {
     calculatorInput.value = inputVal.slice(0, -1);
   }
-});
+}
 
+//special function for 1/x button used in handleClickOnCalculator()
 function handleDivisionToOne() {
   regex = /(\d+)\.?(\d*)$/g;
 
@@ -133,6 +135,7 @@ function handleDivisionToOne() {
   } else calculatorInput.value += `1/`;
 }
 
+//special function for 10^x button used in handleClickOnCalculator()
 function handleTenRaiseToX() {
   regex = /(\d+)\.?(\d*)$/g;
   if (regex.test(calculatorInput.value)) {
@@ -148,6 +151,7 @@ function handleTenRaiseToX() {
   }
 }
 
+//special function for sqrt and cbrt button used in handleClickOnCalculator()
 function handleRoot() {
   regex = /(\d+)$/;
 
@@ -163,14 +167,16 @@ function handleRoot() {
   }
 }
 
+//calculates factorial of passes number
 function fact(num) {
-  let fact = 1;
+  let factOutput = 1;
   for (let i = 2; i <= num; i++) {
-    fact *= i;
+    factOutput *= i;
   }
-  return fact;
+  return factOutput;
 }
 
+//handles the conversion from degree to radian
 function conversionBetweenDegRad(value) {
   if (
     document.getElementsByClassName("deg-rad-button")[0].textContent === "DEG"
@@ -181,6 +187,7 @@ function conversionBetweenDegRad(value) {
   }
 }
 
+//special function to show the functionality of 2nd button
 let secondOperationToggle = 0;
 function handleSecondSetOfOperations(e) {
   e.classList.toggle("selected");
@@ -204,6 +211,7 @@ function handleSecondSetOfOperations(e) {
   }
 }
 
+//used by resultFunc() responsible for getting every character synchronised with eval function used
 function replaceAll(newStr) {
   newStr = newStr.replace(`X`, `*`);
   newStr = newStr.replace(`÷`, `/`);
@@ -253,6 +261,7 @@ function replaceAll(newStr) {
   return newStr;
 }
 
+//handling cases before eval can be applied
 function resultFuncInitialEvaluation(newStr) {
   newStr = replaceAll(newStr);
 
@@ -276,6 +285,7 @@ function resultFuncInitialEvaluation(newStr) {
   return newStr;
 }
 
+//work with eval() and also local storage to handle history
 function resultFunc() {
   try {
     let calculatorInputVal = calculatorInput.value;
@@ -295,6 +305,7 @@ function resultFunc() {
   }
 }
 
+//function used in signdegToggleFunc()
 function opInclude(str, opArr) {
   for (let i of opArr) {
     if (str.includes(i)) return true;
@@ -302,6 +313,7 @@ function opInclude(str, opArr) {
   return false;
 }
 
+//sepcial function handles +/- operation
 function signDegToggleFlagFunc() {
   let str = calculatorInput.value;
   if (str === "") return;
@@ -343,6 +355,7 @@ function signDegToggleFlagFunc() {
   calculatorInput.value = str;
 }
 
+//handles working for the trignometry function dropdown
 function handleTrignometryFunction(funcName) {
   if (funcName === "Trignometry") return;
   regex = /(\d+)$/;
@@ -355,6 +368,7 @@ function handleTrignometryFunction(funcName) {
   document.getElementsByClassName("trig-func")[0].value = "Trignometry";
 }
 
+//handles working for the function dropdown
 function handleAdvancedFunction(funcName) {
   if (funcName === "Function") return;
   regex = /(\d+)$/;
@@ -367,12 +381,14 @@ function handleAdvancedFunction(funcName) {
   document.getElementsByClassName("advance-func")[0].value = "Function";
 }
 
+//visual changes for degree and radian
 function degreeRadianChange(ref) {
   ref.textContent = ref.textContent.trim();
 
   ref.textContent = ref.textContent === "DEG" ? "RAD" : "DEG";
 }
 
+//execution done for f-e button
 function handleFractionToExponential(ref) {
   let newRegex = /(\d+)$/g;
   if (newRegex.test(calculatorInput.value)) {
@@ -399,6 +415,7 @@ function handleFractionToExponential(ref) {
   }
 }
 
+//memory operations
 function handleMC() {
   localStorage.removeItem("calculationOutput");
 }
@@ -424,6 +441,8 @@ function handleMS() {
   let num = eval(resultFuncInitialEvaluation(calculatorInput.value));
   localStorage.setItem("calculationOutput", num);
 }
+
+//work on light - dark mode
 let darkLightFlag = 0;
 function handleDarkLightMode() {
   document
@@ -492,6 +511,7 @@ function handleDarkLightMode() {
   }
 }
 
+//handling history
 function handleHistory() {
   document.getElementsByClassName("text-box")[0].style.display = "none";
   document.getElementsByClassName("advanced-operations")[0].style.display =
