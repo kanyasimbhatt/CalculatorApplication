@@ -424,82 +424,6 @@ function handleMS() {
   let num = eval(resultFuncInitialEvaluation(calculatorInput.value));
   localStorage.setItem("calculationOutput", num);
 }
-
-function handleHistory() {
-  document.getElementsByClassName("text-box")[0].style.display = "none";
-  document.getElementsByClassName("advanced-operations")[0].style.display =
-    "none";
-  document.getElementsByClassName("calculator-buttons")[0].style.display =
-    "none";
-
-  let closingHistoryButton = document.createElement("img");
-  closingHistoryButton.setAttribute(
-    "class",
-    "imageHW hamburger-menu close-history"
-  );
-  closingHistoryButton.setAttribute("src", "./images/x.png");
-  closingHistoryButton.setAttribute("alt", "closing history section button");
-  closingHistoryButton.setAttribute("onclick", "handleClosingHistorySection()");
-  document
-    .getElementsByClassName("enclosing-calculator")[0]
-    .appendChild(closingHistoryButton);
-
-  let newElement = document.createElement("div");
-  newElement.setAttribute("class", "history-section");
-  document
-    .getElementsByClassName("enclosing-calculator")[0]
-    .appendChild(newElement);
-
-  showHistoryContent();
-}
-
-function handleClosingHistorySection() {
-  document.getElementsByClassName("text-box")[0].style.display = "flex";
-  document.getElementsByClassName("advanced-operations")[0].style.display =
-    "block";
-  document.getElementsByClassName("calculator-buttons")[0].style.display =
-    "grid";
-
-  document.getElementsByClassName("close-history")[0].remove();
-  document.getElementsByClassName("history-section")[0].remove();
-}
-
-function showHistoryContent() {
-  let newElement = document.getElementsByClassName("history-section")[0];
-  newElement.innerHTML = `<div class = "history-title-clear-button">
-    <div class = "history-title">History</div>
-    <div class = "clear-history-button">
-    
-    <button onclick = "handleClearHistory()">Clear</button>
-    </div>
-    </div>`;
-  let arr = JSON.parse(localStorage.getItem("history-array"));
-  let historyHtmlCode = "";
-  for (let i = arr.length - 1; i >= 0; i--) {
-    historyHtmlCode += `<div class = "history-data" onclick = "handleClickOnHistoryData(${arr[i][1]})">
-        <div>${arr[i][0]} &nbsp;= &nbsp;</div>
-        <div>${arr[i][1]} </div>
-    </div>`;
-  }
-  newElement.innerHTML += historyHtmlCode;
-}
-
-function handleClearHistory() {
-  localStorage.setItem("history-array", JSON.stringify([]));
-  showHistoryContent();
-}
-
-function handleClickOnHistoryData(value) {
-  handleClosingHistorySection();
-  regex = /(\d+)$/;
-  if (regex.test(calculatorInput.value)) {
-    calculatorInput.value += `X`;
-    calculatorInput.value += `${value}`;
-  } else {
-    calculatorInput.value += `${value}`;
-  }
-}
-
 let darkLightFlag = 0;
 function handleDarkLightMode() {
   document
@@ -565,5 +489,85 @@ function handleDarkLightMode() {
       .forEach((e) => {
         e.style.color = "black";
       });
+  }
+}
+
+function handleHistory() {
+  document.getElementsByClassName("text-box")[0].style.display = "none";
+  document.getElementsByClassName("advanced-operations")[0].style.display =
+    "none";
+  document.getElementsByClassName("calculator-buttons")[0].style.display =
+    "none";
+
+  let closingHistoryButton = document.createElement("img");
+  closingHistoryButton.setAttribute(
+    "class",
+    "imageHW hamburger-menu close-history"
+  );
+  if (darkLightFlag === 1) {
+    closingHistoryButton.setAttribute("src", "./images/cross.png");
+  } else {
+    closingHistoryButton.setAttribute("src", "./images/x.png");
+  }
+
+  closingHistoryButton.setAttribute("alt", "closing history section button");
+  closingHistoryButton.setAttribute("onclick", "handleClosingHistorySection()");
+  document
+    .getElementsByClassName("enclosing-calculator")[0]
+    .appendChild(closingHistoryButton);
+
+  let newElement = document.createElement("div");
+  newElement.setAttribute("class", "history-section");
+  document
+    .getElementsByClassName("enclosing-calculator")[0]
+    .appendChild(newElement);
+
+  showHistoryContent();
+}
+
+function handleClosingHistorySection() {
+  document.getElementsByClassName("text-box")[0].style.display = "flex";
+  document.getElementsByClassName("advanced-operations")[0].style.display =
+    "block";
+  document.getElementsByClassName("calculator-buttons")[0].style.display =
+    "grid";
+
+  document.getElementsByClassName("close-history")[0].remove();
+  document.getElementsByClassName("history-section")[0].remove();
+}
+
+function showHistoryContent() {
+  let newElement = document.getElementsByClassName("history-section")[0];
+  newElement.innerHTML = `<div class = "history-title-clear-button">
+    <div class = "history-title">History</div>
+    <div class = "clear-history-button">
+    
+    <button onclick = "handleClearHistory()">Clear</button>
+    </div>
+    </div>`;
+  let arr = JSON.parse(localStorage.getItem("history-array"));
+  let historyHtmlCode = "";
+  for (let i = arr.length - 1; i >= 0; i--) {
+    historyHtmlCode += `<div class = "history-data" onclick = "handleClickOnHistoryData(${arr[i][1]})">
+        <div>${arr[i][0]} &nbsp;= &nbsp;</div>
+        <div>${arr[i][1]} </div>
+    </div>`;
+  }
+  newElement.innerHTML += historyHtmlCode;
+}
+
+function handleClearHistory() {
+  localStorage.setItem("history-array", JSON.stringify([]));
+  showHistoryContent();
+}
+
+function handleClickOnHistoryData(value) {
+  handleClosingHistorySection();
+  regex = /(\d+)$/;
+  if (regex.test(calculatorInput.value)) {
+    calculatorInput.value += `X`;
+    calculatorInput.value += `${value}`;
+  } else {
+    calculatorInput.value += `${value}`;
   }
 }
