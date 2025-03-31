@@ -15,41 +15,27 @@
             src="./images/history.png"
             class="imageHW hamburger-menu view-history"
             alt="visit history button"
-            onclick="handleHistory()"
             tabindex="0"
           />
           <img
             src="./images/brightness-and-contrast.png"
             alt="button for light and dark mode"
             class="imageHW hamburger-menu dark-light-button"
-            onclick="handleDarkLightMode()"
             tabindex="0"
           />
           <input type="text" class="calculator-input" placeholder="0" />
         </div>
         <div class="advanced-operations">
           <div class="deg-fe">
-            <div
-              class="deg-rad-button"
-              onclick="degreeRadianChange(this)"
-              tabindex="0"
-            >
-              DEG
-            </div>
-            <div tabindex="0" onclick="handleFractionToExponential(this)">
-              F-E
-            </div>
+            <div class="deg-rad-button" tabindex="0">DEG</div>
+            <div tabindex="0" class="f-e-button">F-E</div>
           </div>
           <div class="modular-operation">
-            <div class="gray" tabindex="0" onclick="handleMC()">MC</div>
-            <div class="gray" tabindex="0" onclick="handleMR()">MR</div>
-            <div tabindex="0" onclick="handleMplusAndMinus(this)" class="plus">
-              M+
-            </div>
-            <div tabindex="0" onclick="handleMplusAndMinus(this)" class="minus">
-              M-
-            </div>
-            <div tabindex="0" onclick="handleMS()">MS</div>
+            <div class="gray" tabindex="0" id="mc-button">MC</div>
+            <div class="gray" tabindex="0" id="mr-button">MR</div>
+            <div tabindex="0" id="M-plus-minus-button" class="plus">M+</div>
+            <div tabindex="0" id="M-plus-minus-button" class="minus">M-</div>
+            <div tabindex="0" id="ms-button">MS</div>
           </div>
           <div class="trignometry-functions">
             <div>
@@ -58,10 +44,7 @@
                 src="./images/right-triangle.png"
                 alt="delete content button"
               />
-              <select
-                class="trig-func"
-                onchange="handleTrignometryFunction(this.value)"
-              >
+              <select class="trig-func">
                 <option>Trignometry</option>
                 <option>sin</option>
                 <option>cos</option>
@@ -73,10 +56,7 @@
             </div>
             <div>
               &#119891;
-              <select
-                class="advance-func"
-                onchange="handleAdvancedFunction(this.value)"
-              >
+              <select class="advance-func">
                 <option>Function</option>
                 <option>ceil</option>
                 <option>floor</option>
@@ -84,15 +64,12 @@
             </div>
           </div>
         </div>
-        <div
-          class="calculator-buttons"
-          onclick="handleClickOnCalculator(event)"
-        >
+        <div class="calculator-buttons">
           <div
             aria-label="calculator operation buttons"
             role="button"
             tabindex="0"
-            onclick="handleSecondSetOfOperations(this)"
+            class="2nd-button"
           >
             <p>2<sup>nd</sup></p>
           </div>
@@ -123,7 +100,6 @@
             role="button"
             tabindex="0"
             class="remove-data"
-            onclick="removeDataFromInput()"
           >
             <img
               class="imageHW remove-data-icon"
@@ -358,6 +334,6 @@
         </div>
       </div>
     </div>
-    <script src="./script.js"></script>
+    <script type="module" src="../newscript.js"></script>
   </body>
 </html>
