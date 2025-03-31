@@ -2,13 +2,26 @@ export function handleMC() {
   localStorage.removeItem("calculationOutput");
 }
 
-export function handleClosingHistorySection() {
-  document.getElementsByClassName("text-box")[0].style.display = "flex";
-  document.getElementsByClassName("advanced-operations")[0].style.display =
-    "block";
-  document.getElementsByClassName("calculator-buttons")[0].style.display =
-    "grid";
+//added to handle single memory operation
+export function handleMR() {
+  let val = localStorage.getItem("calculationOutput");
+  if (val) this.calculatorInput.value += val;
+}
 
-  document.getElementsByClassName("close-history")[0].remove();
-  document.getElementsByClassName("history-section")[0].remove();
+export function handleMplusAndMinus(ref) {
+  let previousOutput = localStorage.getItem("calculationOutput");
+  let num = eval(this.resultFuncInitialEvaluation(this.calculatorInput.value));
+
+  let val =
+    ref.className === "plus"
+      ? `${+num + +previousOutput}`
+      : `${+num - +previousOutput}`;
+
+  localStorage.setItem("calculationOutput", val);
+  this.calculatorInput.value = val;
+}
+
+export function handleMS() {
+  let num = eval(this.resultFuncInitialEvaluation(this.calculatorInput.value));
+  localStorage.setItem("calculationOutput", num);
 }

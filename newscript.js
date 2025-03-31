@@ -6,8 +6,12 @@ import {
 } from "./modularMethods/ReplacingStringOperation.js";
 import {
   handleMC,
-  handleClosingHistorySection,
+  handleMR,
+  handleMS,
+  handleMplusAndMinus,
 } from "./modularMethods/OperationsRelatedToMemory.js";
+
+import { handleClosingHistorySection } from "./modularMethods/OperationsRelatedToHistory.js";
 class Calculator {
   constructor() {
     this.validKeyboardCharacters = [
@@ -85,21 +89,21 @@ class Calculator {
       });
 
     document.getElementById("mc-button").addEventListener("click", () => {
-      handleMC();
+      handleMC.call(this);
     });
 
     document.getElementById("mr-button").addEventListener("click", () => {
-      this.handleMR();
+      handleMR.call(this);
     });
 
     document.querySelectorAll("#M-plus-minus-button").forEach((element) => {
       element.addEventListener("click", (event) => {
-        this.handleMplusAndMinus(event.target);
+        handleMplusAndMinus.call(this, event.target);
       });
     });
 
     document.getElementById("ms-button").addEventListener("click", () => {
-      this.handleMS();
+      handleMS.call(this);
     });
 
     document
@@ -405,34 +409,6 @@ class Calculator {
         }
       }
     );
-  }
-
-  //added to handle single memory operation
-  handleMR() {
-    let val = localStorage.getItem("calculationOutput");
-    if (val) this.calculatorInput.value += val;
-  }
-
-  handleMplusAndMinus(ref) {
-    let previousOutput = localStorage.getItem("calculationOutput");
-    let num = eval(
-      this.resultFuncInitialEvaluation(this.calculatorInput.value)
-    );
-
-    let val =
-      ref.className === "plus"
-        ? `${+num + +previousOutput}`
-        : `${+num - +previousOutput}`;
-
-    localStorage.setItem("calculationOutput", val);
-    this.calculatorInput.value = val;
-  }
-
-  handleMS() {
-    let num = eval(
-      this.resultFuncInitialEvaluation(this.calculatorInput.value)
-    );
-    localStorage.setItem("calculationOutput", num);
   }
 
   //added to handle the scenario where user clicks on see history button
